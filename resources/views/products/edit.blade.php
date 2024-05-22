@@ -11,6 +11,7 @@
 
 <form class="container-sm" action="{{ route('products.update', $product) }}" method="POST">
     @csrf
+    @method('PUT')
     <h3>Editar producto</h3>
     <br>
     @if ($errors->any())
