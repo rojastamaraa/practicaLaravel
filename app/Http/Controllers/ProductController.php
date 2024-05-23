@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Requests\StoreProduct;
 
 class ProductController extends Controller
 {
@@ -18,12 +19,8 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'price' => 'required|integer',
-        ]);
         Product::create([
             'name' => $request->name,
             'price' => $request->price,
