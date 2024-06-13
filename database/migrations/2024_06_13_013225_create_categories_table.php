@@ -18,6 +18,7 @@ return new class extends Migration
                 indexName: 'id'
             );
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
