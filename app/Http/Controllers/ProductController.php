@@ -33,12 +33,8 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(StoreProduct $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'price' => 'required|numeric',
-        ]);
         $product->update([
             'name' => $request->name,
             'price' => $request->price,

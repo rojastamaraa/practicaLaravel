@@ -1,6 +1,10 @@
-<form class="container-sm" action="{{ isset($product) ? route('products.update', $product) : route('products.store') }}" method="POST">
+@php
+    use Illuminate\Support\Str;
+@endphp
+
+<form class="container-sm" action="{{ $route }}" method="POST">
     @csrf
-    @if(isset($product))
+    @if(isset($obj))
         @method('PUT')
     @endif
     <h3>@yield('title')</h3>
@@ -11,9 +15,11 @@
         </div>
     @endif
     <br>
-    <input type="text" class="form-control" placeholder="Nombre" name="name" value="{{ isset($product) ? $product->name : '' }}" required>
+    <input type="text" class="form-control" placeholder="Nombre" name="name" value="{{ isset($obj) ? $obj->name : '' }}" required>
     <br>
-    <input type="text" class="form-control" placeholder="Precio" name="price" value="{{ isset($product) ? $product->price : '' }}" required>
+    @if (Str::contains(Route::currentRouteName(), 'products'))
+    <input type="text" class="form-control" placeholder="Precio" name="price" value="{{ isset($obj) ? $obj->price : '' }}" required>   
+    @endif
     <br>
     <input type="submit" class="btn btn-success" name="" id="">
 </form>
