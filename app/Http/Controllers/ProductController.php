@@ -21,10 +21,12 @@ class ProductController extends Controller
 
     public function store(StoreProduct $request)
     {
-        Product::create([
+        $product = Product::create([
             'name' => $request->name,
             'price' => $request->price,
         ]);
+        $product->categories()->sync($request->category_id);
+
         return redirect()->route('products.index')->with('success', 'Producto creado correctamente');
     }
 

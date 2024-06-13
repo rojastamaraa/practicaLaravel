@@ -6,9 +6,9 @@
     </a>
     <br><br>
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
     @endif
     <table class="table table-bordered">
         <tr>
@@ -25,28 +25,35 @@
         </tr>
         <tbody class="table-group-divider">
             @foreach ($obj as $obj2)
-                <tr>
-                    <td>{{ $obj2->id }}</td>
-                    @if ($route == route('categories.create'))
-                    <td>{{ $obj2->parent_id }}</td>
-                    @endif
-                    <td>{{ $obj2->name }}</td>
-                    @if ($route == route('products.create'))
-                    <td>{{ $obj2->price }}</td>
-                    @endif
-                    <td>
-                        <a href="{{ route($type . '.edit', $obj2) }}">
-                            <button class="btn btn-success">Editar</button>
-                        </a>
-                    </td>
-                    <td>
-                        <form action="{{ route($type . '.destroy', $obj2) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ $obj2->id }}</td>
+                @if ($route == route('categories.create'))
+                <td>{{ $obj2->parent_id }}</td>
+                @endif
+                <td>{{ $obj2->name }}</td>
+                @if ($route == route('products.create'))
+                <td>
+                    {{ $obj2->price }}
+                    <ul>
+                        @foreach ($obj2->categories as $category)
+                        <li>{{ $category->name }}</li>
+                        @endforeach
+                    </ul>
+                </td>
+                @endif
+                <td>
+                    <a href="{{ route($type . '.edit', $obj2) }}">
+                        <button class="btn btn-success">Editar</button>
+                    </a>
+                </td>
+                <td>
+                    <form action="{{ route($type . '.destroy', $obj2) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>

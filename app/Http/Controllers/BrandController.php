@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Http\Requests\BrandRequest;
 
@@ -21,9 +20,10 @@ class BrandController extends Controller
 
     public function store(BrandRequest $request)
     {
-        Brand::create([
+       /*  Brand::create([
             'name' => $request->name,
-        ]);
+        ]); */
+        Brand::create($request->all());
         return redirect()->route('brands.index')->with('success', 'Marca creada correctamente');
     }
 
@@ -34,9 +34,10 @@ class BrandController extends Controller
 
     public function update(BrandRequest $request, Brand $brand)
     {
-        $brand->update([
+        /* $brand->update([
             'name' => $request->name,
-        ]);
+        ]); */
+        $brand->update($request->all());
         return redirect()->route('brands.index')->with('success', 'Marca actualizada correctamente');
     }
 
