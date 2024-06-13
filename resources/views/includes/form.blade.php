@@ -15,6 +15,10 @@
         </div>
     @endif
     <br>
+    @if (Str::contains(Route::currentRouteName(), 'categories'))
+    <input type="text" class="form-control" placeholder="Id" name="parent_id" value="{{ isset($obj) ? $obj->parent_id : '' }}" required>
+    @endif
+    <br>
     <input type="text" class="form-control" placeholder="Nombre" name="name" value="{{ isset($obj) ? $obj->name : '' }}" required>
     <br>
     @if (Str::contains(Route::currentRouteName(), 'products'))

@@ -13,6 +13,9 @@
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
+            @if ($route == route('categories.create'))
+            <th>Parent Id</th>
+            @endif
             <th>Nombre</th>
             @if ($route == route('products.create'))
             <th>Precio</th>
@@ -24,6 +27,9 @@
             @foreach ($obj as $obj2)
                 <tr>
                     <td>{{ $obj2->id }}</td>
+                    @if ($route == route('categories.create'))
+                    <td>{{ $obj2->parent_id }}</td>
+                    @endif
                     <td>{{ $obj2->name }}</td>
                     @if ($route == route('products.create'))
                     <td>{{ $obj2->price }}</td>
